@@ -63,7 +63,9 @@ plt.legend()
 plt.show()
 ```
 ### OUTPUT
+
 A - LINEAR TREND ESTIMATION
+
 ![image](https://github.com/user-attachments/assets/63e00113-4af6-4098-9d7f-04c730a506bc)
 
 B- POLYNOMIAL TREND ESTIMATION
