@@ -34,33 +34,58 @@ data['publication_year'] = data['publication_date'].dt.year
 author_counts = data['authors'].value_counts()
 author_mapping = author_counts.to_dict()
 data['authors_count'] = data['authors'].map(author_mapping)
-
 X = data[['publication_year', 'authors_count']].values
 y = data[['bookID']].values
 
-model = LinearRegression()
-model.fit(X, y)
-y_pred = model.predict(X)
-plt.scatter(X[:, 0], y, label='Actual')
-plt.plot(X[:, 0], y_pred, color='red', label='Linear Prediction')
+# Linear Regression Model
+linear_model = LinearRegression()
+linear_model.fit(X, y)
+y_pred_linear = linear_model.predict(X)
+
+# Print Linear Regression Formula
+intercept_linear = linear_model.intercept_[0]
+coefficients_linear = linear_model.coef_[0]
+print(f"Linear Regression Formula: BookID = {intercept_linear:.2f} + "
+      f"{coefficients_linear[0]:.2f} * Publication Year + "
+      f"{coefficients_linear[1]:.2f} * Authors Count")
+
+# Plot Linear Regression
+plt.figure(figsize=(10, 6))
+plt.scatter(X[:, 0], y, label='Actual Data', color='blue')
+plt.plot(X[:, 0], y_pred_linear, color='red', label='Linear Prediction')
 plt.xlabel('Publication Year')
 plt.ylabel('BookID')
+plt.title('Linear Trend Estimation')
 plt.legend()
 plt.show()
 ```
 B- POLYNOMIAL TREND ESTIMATION
 ```python
-poly = PolynomialFeatures(degree=2) 
+# Polynomial Regression Model (degree 2)
+poly = PolynomialFeatures(degree=2)
 X_poly = poly.fit_transform(X)
 
-model = LinearRegression()
-model.fit(X_poly, y)
-y_pred = model.predict(X_poly)
+poly_model = LinearRegression()
+poly_model.fit(X_poly, y)
+y_pred_poly = poly_model.predict(X_poly)
 
-plt.scatter(X[:, 0], y, label='Actual')
-plt.plot(X[:, 0], y_pred, color='red', label='Polynomial Prediction')
+# Print Polynomial Regression Formula
+intercept_poly = poly_model.intercept_[0]
+coefficients_poly = poly_model.coef_[0]
+print(f"Polynomial Regression Formula: BookID = {intercept_poly:.2f} + "
+      f"{coefficients_poly[1]:.2f} * Publication Year + "
+      f"{coefficients_poly[2]:.2f} * Authors Count + "
+      f"{coefficients_poly[3]:.2f} * (Publication Year)^2 + "
+      f"{coefficients_poly[4]:.2f} * (Publication Year * Authors Count) + "
+      f"{coefficients_poly[5]:.2f} * (Authors Count)^2")
+
+# Plot Polynomial Regression
+plt.figure(figsize=(10, 6))
+plt.scatter(X[:, 0], y, label='Actual Data', color='blue')
+plt.plot(X[:, 0], y_pred_poly, color='green', label='Polynomial Prediction (degree=2)')
 plt.xlabel('Publication Year')
-plt.ylabel('bookID')
+plt.ylabel('BookID')
+plt.title('Polynomial Trend Estimation')
 plt.legend()
 plt.show()
 ```
@@ -68,11 +93,14 @@ plt.show()
 
 A - LINEAR TREND ESTIMATION
 
-![image](https://github.com/user-attachments/assets/63e00113-4af6-4098-9d7f-04c730a506bc)
+![image](https://github.com/user-attachments/assets/5c6a11af-7ed3-4f83-b765-201815fbd5b2)
+
 
 B- POLYNOMIAL TREND ESTIMATION
 
-![image](https://github.com/user-attachments/assets/b4fe4eaa-048d-4d8c-aacc-7204436b258e)
+![image](https://github.com/user-attachments/assets/b211966f-66fd-41bd-8e64-531d7b98f194)
+
+
 
 ### RESULT:
 Thus the python program for linear and Polynomial Trend Estiamtion has been executed successfully.
