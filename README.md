@@ -1,5 +1,8 @@
+### Developed By: Prasannalakshmi G
+### Reg No: 212222240075
+### Date: 
+
 # Ex.No: 02 LINEAR AND POLYNOMIAL TREND ESTIMATION
-Date:
 
 ### AIM:
 To Implement Linear and Polynomial Trend Estiamtion Using Python.
